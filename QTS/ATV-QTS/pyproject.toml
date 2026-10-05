@@ -1,0 +1,46 @@
+[project]
+name = "auto-seguro-qts"
+version = "1.0.0"
+description = "Motor de Precificação e Subscrição de Seguro Automotivo - Disciplina de Qualidade e Teste de Software"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-v --strict-markers"
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = [
+    "unit: Testes unitários do domínio e regras de negócio",
+    "ep: Testes de Particionamento de Equivalência (Equivalence Partitioning)",
+    "bva: Testes de Análise do Valor Limite (Boundary Value Analysis)",
+    "error_guessing: Testes de Error Guessing e entradas anômalas",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["app"]
+omit = [
+    "*/tests/*",
+    "*/__init__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
+show_missing = true
+fail_under = 100
